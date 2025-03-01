@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息页面2</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4053468_irldv8i6989.css">
+    <style>
+        :root {
+            --tran: all 0.3s ease;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            transition: all 0.3s ease;
+        }
+
+        /* 新增导航条样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between; /* 子元素均匀分布 */
+            align-items: center;/*垂直方向上居中对齐*/
+            padding: 10px 20px;
+            z-index: 1000;
+            font-size: large;
+        }
+        .logo{
+            font-weight: bold;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 100%;
+            height: 15%;
+            background-color: #575757;
+            transform: translateX(-50%) scaleX(0);
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover::after {
+            border-radius: 5em;
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* 个人信息样式 */
+        .profile {
+            margin-top: 60px;
+            text-align: left;
+        }
+
+        .profile .image {
+            float: left;
+            margin-right: 20px;
+        }
+
+        img {
+            border-radius: 1em;
+        }
+
+        /* 新增按钮样式 */
+        .button-container {
+            margin: 20px 0;
+        }
+
+        .button{
+            padding: 10px 20px;
+            margin: 0 10px;
+            color: white;
+            border: none;
+            border-radius: 5em;
+            cursor: pointer;
+            background-color: #a5a4a4;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .iconfont{
+            color:white;
+            font-size: 1em;
+            transition:color 0.3s ease,font-size 0s ease;
+        }
+
+        .button:hover{
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .button:hover .iconfont{
+            transition: color 0.3s ease,font-size 0s ease;
+        }
+        .button:hover,.button:hover .iconfont,.active,.active .iconfont{
+            color:#a10303;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="navbar">
+    <div class="logo">网站Logo</div>
+    <div>
+        <a href="#">导航1</a>
+        <a href="#">导航2</a>
+        <a href="#">导航3</a>
+    </div>
+</div>
+<div class="profile">
+    <div class="image">
+        <img src="1.jpg" alt="头像" width="150px" height="150px">
+    </div>
+    <div>
+        <h1>娄时铭</h1>
+        <p><strong>学号:</strong> 2405090412</p>
+        <p><strong>兴趣:</strong> 摄影、听歌</p>
+        <p><strong>个人经历:</strong>杭州电子科技大学</p>
+        <p>第二周作业</p>
+    </div>
+</div>
+<div class="button-container">
+    <button class="button" id="like" onclick="comment('like')">点赞 <i class="iconfont icon-a-dianzan1"></i></button>
+    <button class="button" id="unlike" onclick="comment('unlike')">点踩 <i class="iconfont icon-a-chapingchacaidianzanmuzhibuxihuan"></i></button>
+</div>
+</body>
+<script>
+    function comment(id_name){
+        const element = document.getElementById(id_name);
+        if (element.classList.toggle('active')){
+            if (id_name == 'like'){
+                element.style.backgroundColor = '#f6c428';
+            }else{
+                element.style.backgroundColor = '#7e85b4';
+            }
+        }else{
+            element.style.backgroundColor = '#a5a4a4';
+        }
+    }
+</script>
+</html>
