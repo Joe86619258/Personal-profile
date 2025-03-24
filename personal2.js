@@ -15,7 +15,7 @@ function currentTime() {
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
-    const now = `${year}年${month}月${currentDate}日${hours}:${minutes}:${seconds}`;
+    const now = `${year}年${month}月${currentDate}日 ${hours}:${minutes}:${seconds}`;
     return now;
 }
 
@@ -52,19 +52,19 @@ function comment(id_name) {
         let p = document.createElement('p');
         p.textContent = content;
         // 将新的 p 元素添加到 record-container 中
-        recordContainer.appendChild(p);
+        recordContainer.prepend(p);
         checkRecordContainerVisibility();
         alert(content);
         setTimeout(()=>{
             //点赞/拉踩消失
             element.classList.toggle('active');
             element.style.backgroundColor = '#a5a4a4';
-        },2000)
-        // 设置 5 秒的定时器，时间到了就移除 p 元素
-        setTimeout(() => {
-            recordContainer.removeChild(p);
-            checkRecordContainerVisibility();
-        }, 5000);
+        },2000);
+        // // 设置 5 秒的定时器，时间到了就移除 p 元素
+        // setTimeout(() => {
+        //     recordContainer.removeChild(p);
+        //     checkRecordContainerVisibility();
+        // }, 5000);
     }else{
         //取消点赞/拉踩
         element.classList.toggle('active');
@@ -74,12 +74,15 @@ function comment(id_name) {
 
 // 检查 recordContainer 中是否有 p 元素并控制其显示
 function checkRecordContainerVisibility() {
-    const pElements = recordContainer.getElementsByTagName('p');
-
-    if (pElements.length === 0) {
+    // 检查记录数量，超过 5 条则删除最老的记录
+    const records = recordContainer.children;
+    if(records.length===0){
         recordContainer.style.display = 'none';
-    } else {
+    }else{
         recordContainer.style.display = 'block';
+        if (records.length > 5) {
+            recordContainer.removeChild(records[records.length - 1]);
+        }
     }
 }
 
@@ -88,7 +91,7 @@ window.addEventListener('load', checkRecordContainerVisibility);
 
 //显示导航正在施工
 // 获取所有带有 .navigation 类的元素
-let btns = document.querySelectorAll(".navigation");
+let btns = document.querySelectorAll('a[href="#"]');
 let alertEl = document.querySelector(".alert");
 
 // 遍历所有 .navigation 元素并为其添加点击事件监听器

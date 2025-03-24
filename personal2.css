@@ -156,6 +156,8 @@ img {
     border: 1px solid #ccc; /* 边框为 1px 宽的灰色实线 */
     border-radius: 5px; /* 边框圆角为 5px */
     background-color: #f9f9f9; /* 背景颜色为浅灰色 */
+    /* 添加阴影效果 */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* 设置添加进来信息的样式 */
@@ -170,4 +172,13 @@ img {
 /* 最后一条信息不显示底部边框 */
 #recordContainer p:last-child {
     border-bottom: none;
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
 }
