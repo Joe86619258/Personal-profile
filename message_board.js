@@ -2,7 +2,7 @@
 function todayDate() {
     const date = new Date();
     const year = date.getFullYear();
-    const month = date.getMonth();
+    const month = date.getMonth() + 1;
     const currentDate = date.getDate();
     const now = `${year}年${month}月${currentDate}日`;
     return now;
@@ -12,7 +12,7 @@ function todayDate() {
 function postDate() {
     const postDate = document.querySelector('.post_date');
     postDate.innerHTML = todayDate();
-    setTimeout("postDate()", 100000);
+    setTimeout("postDate()", 86400000);
 }
 
 postDate();
@@ -53,7 +53,7 @@ function handleFiles(files) {
     let successAmount = 0;
     const dropArea = document.querySelector('#file_drop_area');
     const dropAreaText = dropArea.querySelector('p');
-    
+
     // 添加上传中的状态
     dropArea.classList.add('uploading');
     dropAreaText.textContent = '文件上传中...';
@@ -76,7 +76,7 @@ function handleFiles(files) {
         dropAreaText.textContent = `${successAmount} 张照片全部上传成功!`;
     } else if (successAmount !== files.length && successAmount > 0) {
         dropAreaText.textContent = `成功上传${successAmount}张照片,
-        ${files.length-successAmount}张照片上传失败!`;
+        ${files.length - successAmount}张照片上传失败!`;
     } else {
         dropAreaText.textContent = `上传失败!`;
         dropArea.classList.remove('uploaded');
@@ -84,7 +84,7 @@ function handleFiles(files) {
 
     // 重置 #file_upload 输入框
     const fileUpload = document.getElementById('file_upload');
-    fileUpload.value = ''; 
+    fileUpload.value = '';
 }
 
 // 判断照片类型
@@ -112,7 +112,7 @@ function previewFile(file) {
             previewItem.classList.add('preview_item');
             previewItem.draggable = true;
             // 为 previewItem 设置唯一的 id
-            previewItem.id = `preview_${Date.now()}`; 
+            previewItem.id = `preview_${Date.now()}`;
 
             previewItem.innerHTML = `
                 <img src = "${reader.result}">
@@ -162,48 +162,120 @@ const editorArea = document.querySelector('#editorArea');
 const modal = document.querySelector('.modal');
 const modalContent = document.querySelector('.modal_content');
 const modalContentContent = modalContent.querySelector('p');
+const nicknameInput = document.querySelector('#nickname');
+const resetButton = document.querySelector('#reset_message');
 
-submitButton.addEventListener('click', ()=>{
+submitButton.addEventListener('click', () => {
+    const nickname = nicknameInput.value;
     const content = editorArea.value;
     const Htext = modalContent.querySelector('h3');
-    console.log(content);
-    
-    Htext.textContent = '上传成功';
-    if(content.trim() != ''){
-        if(imagePreview.childElementCount>0){
-            modalContentContent.textContent = `上传内容为:${content},共上传了${imagePreview.childElementCount}张照片`;
-        }else{
-            modalContentContent.textContent = `上传内容为:${content}`;
-        }
-    }else{
-        if(imagePreview.childElementCount>0){
-            modalContentContent.textContent = `共上传了${imagePreview.childElementCount}张照片`;
-        }else{            
-            Htext.textContent = '上传失败';
-        }
+    const nicknameRegex = /^[a-zA-Z][a-zA-Z0-9]{0,9}$/;
+
+    // 验证昵称输入
+    if (!nicknameRegex.test(nickname)) {
+        nicknameInput.classList.add('error');
+        Htext.textContent = '上传失败';
+        modalContentContent.textContent = '昵称格式不正确，请输入长度不超过10字符，由字母开头，字母和数字组成的昵称。';
+        modal.classList.add('show');
+        modalContent.classList.add('show');
+        return;
+    } else {
+        nicknameInput.classList.remove('error');
     }
+
+    // 验证富文本输入框
+    if (content.trim() === '') {
+        editorArea.classList.add('error');
+        Htext.textContent = '上传失败';
+        modalContentContent.textContent = '留言内容不能为空，请输入留言内容。';
+        modal.classList.add('show');
+        modalContent.classList.add('show');
+        return;
+    } else {
+        editorArea.classList.remove('error');
+    }
+
+    console.log(content);
+
+    Htext.textContent = '上传成功';
     
-    modal.classList.toggle('show');
-    modalContent.classList.toggle('show');
+    // 根据是否有图片，设置弹窗内容
+    if (imagePreview.childElementCount > 0) {
+        modalContentContent.textContent = `上传内容为:${content},共上传了${imagePreview.childElementCount}张照片`;
+    } else {
+        modalContentContent.textContent = `上传内容为:${content}`;
+    }
+
+    // 将留言添加到留言区
+    const messageBoard = document.querySelector('.default_post');
+    const newPost = document.createElement('div');
+    newPost.classList.add('post');
+    newPost.innerHTML = `
+        <div class="post_header">
+            <h2>${nickname}</h2>
+            <span class="post_date">${todayDate()}</span>
+        </div>
+        <div class="post_content">
+            <p>${content}</p>
+        </div>
+    `;
+    messageBoard.insertBefore(newPost, messageBoard.children[1]);
+
+    modal.classList.add('show');
+    modalContent.classList.add('show');
 });
+
 
 // 点击确定按钮关闭弹窗
 const closeButton = modalContent.querySelector('button');
-closeButton.addEventListener('click',()=>{
-    modal.classList.toggle('show');
-    modalContent.classList.toggle('show');
-    // 清空编辑器和预览区
-    editorArea.value = '';
-    imagePreview.innerHTML = '';
+closeButton.addEventListener('click', () => {
+    if(modal.classList.contains('show')){
+        modal.classList.remove('show');
+        modalContent.classList.remove('show'); 
+    }
     // 重置文件上传区域
     resetFileUpload();
 });
 
+// 重置按钮点击事件
+resetButton.addEventListener('click', () => {
+    // 重置文件上传区域
+    resetFileUpload();
+});
+
+const gender = document.querySelector('#gender').value;
+const replyDate = document.querySelector('#reply_date').value;
 // 添加重置功能
 function resetFileUpload() {
+    if(nicknameInput.classList.contains('error')){
+        nicknameInput.classList.remove('error'); 
+    }
+    if(editorArea.classList.contains('error')){
+        editorArea.classList.remove('error');
+    }
+    if(imagePreview.childElementCount > 0){
+        imagePreview.innerHTML = ''; 
+    }
+    if(editorArea.value !== ''){
+        editorArea.value = ''; 
+    }
+    if(nicknameInput.value!== ''){
+        nicknameInput.value = '';
+    }
+    if(gender!=='male'){
+        gender = 'male';
+    }
+    document.querySelector('#email').value = '';
+    if(replyDate!==''){
+        replyDate = postDate();
+    }
     const dropArea = document.querySelector('#file_drop_area');
     const dropAreaText = dropArea.querySelector('p');
-    
+
     dropArea.classList.remove('uploading', 'uploaded');
     dropAreaText.textContent = '拖拽文件到此处上传，或点击选择文件';
+}
+
+Window.onload = function(){
+    replyDate = postDate();
 }
