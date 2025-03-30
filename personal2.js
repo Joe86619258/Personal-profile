@@ -74,14 +74,16 @@ function comment(id_name) {
 
 // 检查 recordContainer 中是否有 p 元素并控制其显示
 function checkRecordContainerVisibility() {
-    // 检查记录数量，超过 5 条则删除最老的记录
-    const records = recordContainer.children;
-    if(records.length===0){
-        recordContainer.style.display = 'none';
-    }else{
-        recordContainer.style.display = 'block';
-        if (records.length > 5) {
-            recordContainer.removeChild(records[records.length - 1]);
+    if (recordContainer) {
+        // 检查记录数量，超过 5 条则删除最老的记录
+        const records = recordContainer.children;
+        if(records.length===0){
+            recordContainer.style.display = 'none';
+        }else{
+            recordContainer.style.display = 'block';
+            if (records.length > 5) {
+                recordContainer.removeChild(records[records.length - 1]);
+            }
         }
     }
 }

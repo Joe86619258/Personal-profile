@@ -53,7 +53,7 @@ nickName.addEventListener('blur', () => {
 });
 
 //判断输入昵称是否符合要求
-export function isValidNickname(nickVal) {
+function isValidNickname(nickVal) {
     const tips = nickParent.querySelector('.tips');
     const len = tips.querySelector('.len');
     const standard = tips.querySelector('.standard');

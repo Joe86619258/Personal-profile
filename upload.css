@@ -1,6 +1,7 @@
 :root{
     --fontFamily: 'HarmonyOS Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
     --transition: 0.3s ease all;
+    --slowTransition: 0.4s ease all;
     --fixedBackgroundColor: rgba(0, 0, 0, 0.5);
     --importantColor: red;
     --error-border:1px solid red;

@@ -148,7 +148,7 @@
 
 /* 留言按钮样式 */
 #submit_message {
-    margin: 10px;
+    margin-top: 10px;
     background-color: #007BFF;
     color: white;
     padding: 10px 20px;
@@ -156,10 +156,12 @@
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    transition: var(--transition);
 }
 
 #submit_message:hover {
     background-color: #0056b3;
+    font-size: 1em;
 }
 
 #submit_message:active {
@@ -169,7 +171,7 @@
 
 /* 重置按钮样式 */
 #reset_message {
-    margin: 10px;
+    margin-top: 10px;
     background-color: #ccc;
     color: white;
     padding: 10px 20px;
@@ -177,10 +179,12 @@
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    transition: var(--transition);
 }
 
 #reset_message:hover {
     background-color: #999;
+    font-size: 1em;
 }
 
 #reset_message:active {

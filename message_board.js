@@ -162,10 +162,10 @@ const editorArea = document.querySelector('#editorArea');
 const modal = document.querySelector('.modal');
 const modalContent = document.querySelector('.modal_content');
 const modalContentContent = modalContent.querySelector('p');
-const nickName = document.querySelector('#nickname');
+// const nickName = document.querySelector('#nickname');
 const resetButton = document.querySelector('#reset_message');
 
-import { isValidNickname } from "./nickname.js";
+// import { isValidNickname } from "./nickname.js";
 
 submitButton.addEventListener('click', () => {
     const nickname = nickName.value;
@@ -244,9 +244,9 @@ resetButton.addEventListener('click', () => {
     resetFileUpload();
 });
 
-const gender = document.querySelector('#gender').value;
-const replyDate = document.querySelector('#reply_date').value;
-const nickParent = nickName.parentElement;
+let gender = document.querySelector('#gender').value;
+let replyDate = document.querySelector('#reply_date').value;
+// const nickParent = nickName.parentElement;
 // 添加重置功能
 function resetFileUpload() {
     if(nickName.classList.contains('error')){
