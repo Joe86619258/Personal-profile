@@ -162,25 +162,23 @@ const editorArea = document.querySelector('#editorArea');
 const modal = document.querySelector('.modal');
 const modalContent = document.querySelector('.modal_content');
 const modalContentContent = modalContent.querySelector('p');
-const nicknameInput = document.querySelector('#nickname');
+const nickName = document.querySelector('#nickname');
 const resetButton = document.querySelector('#reset_message');
 
+import { isValidNickname } from "./nickname.js";
+
 submitButton.addEventListener('click', () => {
-    const nickname = nicknameInput.value;
+    const nickname = nickName.value;
     const content = editorArea.value;
     const Htext = modalContent.querySelector('h3');
-    const nicknameRegex = /^[a-zA-Z][a-zA-Z0-9]{0,9}$/;
 
     // 验证昵称输入
-    if (!nicknameRegex.test(nickname)) {
-        nicknameInput.classList.add('error');
+    if (!isValidNickname(nickname)) {
         Htext.textContent = '上传失败';
         modalContentContent.textContent = '昵称格式不正确，请输入长度不超过10字符，由字母开头，字母和数字组成的昵称。';
         modal.classList.add('show');
         modalContent.classList.add('show');
         return;
-    } else {
-        nicknameInput.classList.remove('error');
     }
 
     // 验证富文本输入框
@@ -209,16 +207,19 @@ submitButton.addEventListener('click', () => {
     // 将留言添加到留言区
     const messageBoard = document.querySelector('.default_post');
     const newPost = document.createElement('div');
-    newPost.classList.add('post');
+    newPost.classList.add('post_entirety');
     newPost.innerHTML = `
-        <div class="post_header">
-            <h2>${nickname}</h2>
-            <span class="post_date">${todayDate()}</span>
-        </div>
-        <div class="post_content">
-            <p>${content}</p>
-        </div>
+        <div class="post_header">${nickname}<span class="iconfont icon-aixin"></span></div>
+        <div class="post_date">${todayDate()}</div>
+        <div class="post_content">${content}</div>
+        <div class="post_line"></div>
     `;
+    const heartIcon = newPost.querySelector('.iconfont');
+    heartIcon.addEventListener('click', () => {
+        heartIcon.classList.toggle('icon-aixin');
+        heartIcon.classList.toggle('icon-aixin-copy'); 
+        console.log('已点赞');
+    });
     messageBoard.insertBefore(newPost, messageBoard.children[1]);
 
     modal.classList.add('show');
@@ -245,10 +246,14 @@ resetButton.addEventListener('click', () => {
 
 const gender = document.querySelector('#gender').value;
 const replyDate = document.querySelector('#reply_date').value;
+const nickParent = nickName.parentElement;
 // 添加重置功能
 function resetFileUpload() {
-    if(nicknameInput.classList.contains('error')){
-        nicknameInput.classList.remove('error'); 
+    if(nickName.classList.contains('error')){
+        nickName.classList.remove('error'); 
+        if(nickParent.querySelector('.tips')){
+            nickParent.querySelector('.tips').remove();
+        }
     }
     if(editorArea.classList.contains('error')){
         editorArea.classList.remove('error');
@@ -259,16 +264,14 @@ function resetFileUpload() {
     if(editorArea.value !== ''){
         editorArea.value = ''; 
     }
-    if(nicknameInput.value!== ''){
-        nicknameInput.value = '';
+    if(nickName.value!== ''){
+        nickName.value = '';
     }
     if(gender!=='male'){
         gender = 'male';
     }
     document.querySelector('#email').value = '';
-    if(replyDate!==''){
-        replyDate = postDate();
-    }
+    replyDate = postDate();
     const dropArea = document.querySelector('#file_drop_area');
     const dropAreaText = dropArea.querySelector('p');
 
@@ -276,6 +279,6 @@ function resetFileUpload() {
     dropAreaText.textContent = '拖拽文件到此处上传，或点击选择文件';
 }
 
-Window.onload = function(){
+window.onload = function(){
     replyDate = postDate();
 }

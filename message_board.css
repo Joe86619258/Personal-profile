@@ -57,15 +57,93 @@
     margin: 0; /* 去除默认的外边距 */
 }
 
-.post_content li , .public_message_board .post_content p{
+.post_content li {
     font-size: 1em;
     line-height: 1.6;
     margin-bottom: 5px;
 }
 
+/* 置顶留言板样式 */
+.public_message_board{
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    justify-content: center;
+}
+
+.public_message_board .post{
+    width: 100%;
+}
+
 .pinned_post_header{
     display: flex;
     align-items: start;
+    font-weight: bold;
+}
+
+.public_message_board .post_entirety{
+    margin-left: 20px; 
+    cursor: pointer;
+    padding:10px 10px 0 10px;
+}
+
+.public_message_board .post_entirety:hover{
+    background-color: #bbbbbb;
+    transition: var(--transition);
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
+.public_message_board .post_entirety .post_header{
+    font-size: 1.5em;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.public_message_board .post_entirety .post_header .iconfont{
+    font-size: 1em;
+    text-align: right;
+    margin-right: 80px;
+    transition: var(--transition);
+}
+
+.public_message_board .post_entirety .post_header .icon-aixin{
+    color:#999;
+}
+
+.public_message_board .post_entirety:hover .icon-aixin{
+    color: #ffffff;
+}
+
+.public_message_board .post_entirety .post_header .icon-aixin-copy{
+    color: #d81e06;
+}
+
+.public_message_board .post_entirety .post_date{
+    font-size: 0.8em;
+    text-align: left;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.public_message_board .post_entirety:hover .post_date{
+    color: #ffffff;
+}
+
+.public_message_board .post_entirety .post_content{
+    font-size: 1.2em;
+    text-align: left;
+    margin-bottom: 20px;
+    word-wrap: break-word; /* 允许长单词或 URL 地址换行到下一行 */
+    word-break: break-all; /* 允许在单词内换行 */
+}
+
+.public_message_board .post_entirety .post_line{
+    width: calc(100% - 10%);
+    border: 2px solid #8b8b8b;
+    margin-left: 50px;
+    border-radius: 50%;
+    opacity: 0.5;
 }
 
 /* 留言按钮样式 */
@@ -121,7 +199,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--fixedBackgroundColor);
     z-index: 900;
 }
 
@@ -138,7 +216,6 @@
     z-index: 991;
     min-width: 200px;
     padding: 20px;
-
 }
 
 .modal_content button {
@@ -170,15 +247,4 @@ footer {
     font-size: 1em;
 }
 
-/* 添加上传中的状态 */
-#file_drop_area.uploading {
-    border-color: #ffd700; /* 黄色边框 */
-    background-color: rgba(255, 215, 0, 0.05);
-}
-
-/* 添加上传完成的状态 */
-#file_drop_area.uploaded {
-    border-color: #28a745; /* 绿色边框 */
-    background-color: rgba(40, 167, 69, 0.05);
-}
 

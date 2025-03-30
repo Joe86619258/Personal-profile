@@ -1,8 +1,23 @@
 :root{
     --fontFamily: 'HarmonyOS Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --transition: 0.3s ease all;
+    --fixedBackgroundColor: rgba(0, 0, 0, 0.5);
+    --importantColor: red;
+    --error-border:1px solid red;
 }
+
 body{
   font-family: var(--fontFamily); 
+}
+
+/* 错误样式 */
+.error{
+    border: var(--error-border) !important;
+}
+
+.error:focus {
+    outline: none; /* 移除默认的轮廓线 */
+    border: var(--error-border) !important; /* 添加红色边框 */
 }
 
 /* 新留言区域样式 */
@@ -21,7 +36,7 @@ body{
 }
 
 .required {
-   color: red; 
+   color: var(--importantColor); 
 }
 
 /* 输入框样式 */
@@ -44,12 +59,58 @@ body{
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box; /* 确保宽度包含内边距和边框 */
+    outline: none; /* 移除默认的轮廓线 */;
 }
 
-/* 错误样式 */
-.error {
-    border: 1px solid red !important;
+.input_group input:focus{
+    outline: none; /* 移除默认的轮廓线 */
+    border: 2px solid #007BFF; /* 添加蓝色边框 */
 }
+
+/* 昵称输入框提示样式  */
+.tips {
+    font-size: 0.9em; /* 提示文字大小 */
+    margin-top: 5px; /* 提示文字与输入框之间的间距 */  
+    transition: var(--transition);
+    margin-left: 5px;
+}
+
+/* 提示图标样式 */
+.tips .iconfont{
+    font-size: 0.9em; /* 调整字体大小 */
+    position: relative; /* 相对定位 */ 
+    margin-right: 5px;
+}
+
+.len , .standard{
+    color: #549df8;
+}
+
+.icon-tishi{
+    color: #ff5b5b;
+}
+
+.icon-dui-copy{
+    color: #2cd484;
+}
+
+#gender{
+    padding-right: 10px;
+}
+
+/* 选中 #gender 的第一个子元素 */
+#gender option:first-child:hover {
+    /* 在这里添加你想要的样式 */
+    background-color: #549df8 !important;
+    color: white;
+}
+
+#gender option:last-child:hover {
+    /* 在这里添加你想要的样式 */
+    background-color: #ff5b5b !important;
+    color: white;
+}
+
 
 /* 富文本输入框父亲样式 */
 #editor {
@@ -74,6 +135,7 @@ body{
     resize: none;
     box-sizing: border-box; /* 添加这行确保padding不会影响总宽度 */
     margin-top: 5px;
+    outline: none; /* 移除默认的轮廓线 */;
 }
 
 /* 文件上传区域父亲样式 */
@@ -123,6 +185,19 @@ body{
     display: none;
 }
 
+/* 添加上传中的状态 */
+#file_drop_area.uploading {
+    border-color: #ffd700; /* 黄色边框 */
+    background-color: rgba(255, 215, 0, 0.05);
+}
+
+/* 添加上传完成的状态 */
+#file_drop_area.uploaded {
+    border-color: #28a745; /* 绿色边框 */
+    background-color: rgba(40, 167, 69, 0.05);
+}
+
+
 /* 拖拽提示文本样式 */
 #file_drop_area .drag-text {
     display: block;
@@ -131,6 +206,7 @@ body{
     font-size: 0.9em;
 }
 
+/* 上传图片样式 */
 #image_preview {
     margin-top: 10px;
     width: 100%;
