@@ -205,7 +205,7 @@ submitButton.addEventListener('click', () => {
     }
 
     // 将留言添加到留言区
-    const messageBoard = document.querySelector('.default_post');
+    const messageBoard = document.querySelector('.default_post_container');
     const newPost = document.createElement('div');
     newPost.classList.add('post_entirety');
     newPost.innerHTML = `
