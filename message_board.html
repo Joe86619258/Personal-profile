@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>留言板</title>
-    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4053468_dz59i37xjsd.css">
+    <link rel="stylesheet" href="./font/iconfont.css">
     <link rel="stylesheet" href="personal2.css">
     <link rel="stylesheet" href="message_board.css">
     <link rel="stylesheet" href="upload.css">
+    <link rel="stylesheet" href="right_menu.css">
 </head>
 
 <body>
@@ -50,8 +51,13 @@
                 <div class="pinned_post_header">
                     <h2>置顶留言</h2>
                 </div>
+                <div class="pinned_post_container"></div>
             </div>
             <div class="default_post">
+                <div class="default_post_header">
+                    <h2>普通留言</h2>
+                </div>
+                <div class="default_post_container"></div>
             </div>
         </div>
     </div>
@@ -111,6 +117,13 @@
         </div>
     </div>
 
+    <div id="right_menu">
+        <ul>
+            <li id="delete_item">删除</li>
+            <li id="add_item">添加到</li>
+        </ul>
+    </div>
+
     <!-- 复制个人主页的 footer -->
     <footer>
         <p>版权所有 &copy; 2025 娄时铭</p>
@@ -123,6 +136,6 @@
 <script src="nickname.js" type="text/javascript"></script>
 <script src="personal2.js" type="text/javascript"></script>
 <script src="message_board.js" type="text/javascript"></script>
-
+<script src="right_menu.js" type="text/javascript"></script>
 
 </html>
