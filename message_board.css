@@ -75,7 +75,7 @@
     width: 100%;
 }
 
-.pinned_post_header{
+.pinned_post_header,.default_post_header{
     display: flex;
     align-items: start;
     font-weight: bold;
@@ -85,13 +85,13 @@
     margin-left: 20px; 
     cursor: pointer;
     padding:10px 10px 0 10px;
+    border-radius: 10px;
 }
 
 .public_message_board .post_entirety:hover{
     background-color: #bbbbbb;
     transition: var(--transition);
     opacity: 0.8;
-    border-radius: 10px;
 }
 
 .public_message_board .post_entirety .post_header{
