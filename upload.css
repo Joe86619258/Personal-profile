@@ -74,6 +74,7 @@ body{
     margin-top: 5px; /* 提示文字与输入框之间的间距 */  
     transition: var(--transition);
     margin-left: 5px;
+    transition-timing-function: cubic-bezier(0.396, -0.479, 0.571, 1.428);/* 已有的贝塞尔曲线 */
 }
 
 /* 提示图标样式 */

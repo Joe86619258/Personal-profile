@@ -1,0 +1,63 @@
+/* 新增导航条样式 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    /* 子元素均匀分布 */
+    align-items: center;
+    /*垂直方向上居中对齐*/
+    padding: 15px;
+    z-index: 1000;
+    font-size: large;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+    font-weight: bold;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    margin-left: 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar ul li a:hover{
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.navbar ul li a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 100%;
+    height: 15%;
+    background-color: #575757;
+    transform: translateX(-50%) scaleX(0);
+    transition: all 0.3s ease;
+}
+
+.navbar ul li a:hover::after {
+    border-radius: 5em;
+    transform: translateX(-50%) scaleX(1);
+}

@@ -1,0 +1,132 @@
+:root {
+    --tran: all 0.3s ease;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    transition: all 0.3s ease;
+}
+
+/* 个人信息样式 */
+.profile {
+    margin-top: 90px;
+    text-align: left;
+}
+
+.profile .image {
+    float: left;
+    margin-right: 20px;
+}
+
+img {
+    border-radius: 1em;
+}
+
+/* 新增按钮样式 */
+.button-container {
+    margin: 20px 0;
+}
+
+.button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    color: white;
+    border: none;
+    border-radius: 5em;
+    cursor: pointer;
+    background-color: #a5a4a4;
+    transition: all 0.3s ease;
+    font-size: 1em;
+}
+
+.iconfont {
+    color: white;
+    font-size: 1em;
+    transition: color 0.3s ease, font-size 0s ease;
+}
+
+.button:hover {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.button:hover .iconfont {
+    transition: color 0.3s ease, font-size 0s ease;
+}
+
+.button:hover,
+.button:hover .iconfont,
+.active,
+.active .iconfont {
+    color: #a10303;
+}
+
+/* 覆盖整个页面，添加毛玻璃效果和背景模糊变暗 */
+.alert {
+    display: none;
+    position: fixed; /* 固定定位，覆盖整个页面 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 背景半透明黑色，让背景变暗 */
+    backdrop-filter: blur(5px); /* 毛玻璃效果 */
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* 确保在最上层 */
+}
+
+/* 居中靠上一点 */
+.alert-content {
+    position: relative;
+    top: -15%; /* 相对原来位置向上偏移 15%，可以根据需要调整 */
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 20%;
+    text-align: center;
+}
+
+/* 文字在 alert-content 里上下左右居中 */
+.alert-content a {
+    display: block;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 设置 record-container 的样式 */
+#recordContainer {
+    width: 30%; /* 设置容器宽度为页面宽度的 80% */
+    margin: 20px auto; /* 上下外边距为 20px，左右居中 */
+    padding: 15px; /* 内边距为 15px */
+    border: 1px solid #ccc; /* 边框为 1px 宽的灰色实线 */
+    border-radius: 5px; /* 边框圆角为 5px */
+    background-color: #f9f9f9; /* 背景颜色为浅灰色 */
+    /* 添加阴影效果 */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* 设置添加进来信息的样式 */
+#recordContainer p {
+    font-size: 16px; /* 字体大小为 16px */
+    color: #333; /* 字体颜色为深灰色 */
+    margin: 10px 0; /* 上下外边距为 10px，左右无外边距 */
+    padding: 5px; /* 内边距为 5px */
+    border-bottom: 1px dotted #ccc; /* 底部边框为 1px 宽的灰色虚线 */
+}
+
+/* 最后一条信息不显示底部边框 */
+#recordContainer p:last-child {
+    border-bottom: none;
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+}
